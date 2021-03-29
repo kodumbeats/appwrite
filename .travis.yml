@@ -25,6 +25,7 @@ before_install:
     echo "${DOCKERHUB_PULL_PASSWORD}" | docker login --username "${DOCKERHUB_PULL_USERNAME}" --password-stdin
   fi
 - docker --version
+- docker run --rm --privileged linuxkit/binfmt:v0.8
 - docker buildx create --use
 - chmod -R u+x ./.travis-ci
 
@@ -45,5 +46,10 @@ deploy:
     edge: true
     script: ./.travis-ci/deploy.sh
     on:
-      repo: appwrite/appwrite
-      branch: deploy
+      tags: true
+  - provider: script
+    edge: true
+    script: ./.travis-ci/deploy-dev.sh
+    on:
+      branch: dev
+
