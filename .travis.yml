@@ -29,6 +29,10 @@ before_install:
 - docker buildx create --use
 - chmod -R u+x ./.travis-ci
 
+env:
+- COMPOSE_DOCKER_CLI_BUILD=1 
+- DOCKER_BUILDKIT=1=1 
+
 install:
 - docker-compose up -d
 - sleep 10
