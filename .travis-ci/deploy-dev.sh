@@ -8,4 +8,4 @@
 #   - for builds triggered by a tag, this is the same as the name
 #     of the tag (TRAVIS_TAG)
 
-docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t kodumbeats/appwrite:$TRAVIS_BRANCH ./ --push
+docker buildx build --platform linux/amd64,linux/arm64 -t kodumbeats/appwrite:$TRAVIS_BRANCH ./ --push
