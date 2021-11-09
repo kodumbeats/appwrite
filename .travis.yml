@@ -54,7 +54,7 @@ install:
 - docker pull composer:2.0
 - docker pull php:8.0-cli-alpine
 # VERSION required for production builds on tags
-- docker-compose build --build-arg VERSION="${TRAVIS_TAG}"
+- docker-compose build
 - docker-compose up -d
 - sleep 10
 
