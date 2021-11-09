@@ -36,6 +36,7 @@ before_install:
 - sudo mv docker-compose /usr/local/bin
 - docker-compose --version
 # Enable Buildkit
+- docker run --rm --privileged linuxkit/binfmt:v0.8
 - docker buildx create --name travis_builder --use
 - export COMPOSE_INTERACTIVE_NO_CLI
 - export DOCKER_BUILDKIT=1
@@ -52,7 +53,8 @@ install:
 # https://github.com/moby/moby/issues/41864
 - docker pull composer:2.0
 - docker pull php:8.0-cli-alpine
-- docker-compose build
+# VERSION required for production builds on tags
+- docker-compose build --build-arg VERSION="${TRAVIS_TAG}"
 - docker-compose up -d
 - sleep 10
 
@@ -76,5 +78,5 @@ deploy:
     edge: true
     script: ./.travis-ci/deploy.sh
     on:
-      repo: appwrite/appwrite
-      branch: deploy
+      tags: true
+      condition: "$TRAVIS_CPU_ARCH = amd64"
