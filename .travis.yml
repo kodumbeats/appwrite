@@ -79,4 +79,4 @@ deploy:
     script: ./.travis-ci/deploy.sh
     on:
       tags: true
-      condition: env(TRAVIS_CPU_ARCH) = amd64
+      condition: env(TRAVIS_CPU_ARCH) = "amd64"
